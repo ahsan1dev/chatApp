@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 
@@ -7,12 +8,6 @@ const socket = io("http://localhost:4000", {
 function App() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    socket.on("message", (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-    });
-  }, []);
 
   const handleInputChange = (e) => {
     setMessage(e.target.value);
@@ -24,9 +19,15 @@ function App() {
     setMessage("");
   };
 
+  useEffect(() => {
+    socket.on("recive", (recivemsg) => {
+      setMessages((prevMessages) => [...prevMessages, recivemsg]);
+    });
+  }, [socket]);
+
   return (
     <div className="App">
-      <h1>Real-Time Chat</h1>
+      <h1>Real-Time Cha..</h1>
       <div className="message-container">
         {messages.map((msg, index) => (
           <div key={index} className="message">

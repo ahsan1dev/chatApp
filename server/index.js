@@ -25,11 +25,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 io.on("connection", (socket) => {
-  // console.log(socket.id);
+  console.log(socket.id);
   socket.on("message", (data) => {
     console.log(data);
+    socket.broadcast.emit("recive", data);
   });
-  console.log("Connection on");
+  // console.log("Connection on");
 });
 
 server.listen(port, () => {
