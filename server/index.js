@@ -25,12 +25,18 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  socket.on("join_room", (data) => {
+    socket.join(data);
+  });
+
   socket.on("message", (data) => {
     console.log(data);
     socket.broadcast.emit("recive", data);
   });
-  // console.log("Connection on");
+
+  socket.on("disconnect", () => {
+    console.log("User Disconnected", socket.id);
+  });
 });
 
 server.listen(port, () => {
