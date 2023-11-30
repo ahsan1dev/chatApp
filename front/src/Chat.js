@@ -10,8 +10,6 @@ function Chat({ socket, username, room }) {
   };
 
   const handleSendMessage = async (e) => {
-    e.preventDefault();
-
     if (message !== "") {
       const messageData = {
         room: room,
@@ -39,8 +37,6 @@ function Chat({ socket, username, room }) {
       setreciveMessage((prevMessages) => [...prevMessages, recivemsg]);
     });
   }, [socket]);
-
-  console.log(recivemessages);
 
   return (
     <div className="chat-window">
